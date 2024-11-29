@@ -1,0 +1,63 @@
+﻿<Window x:Class="Advanced_DeckBuilder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Deck Builder" Height="500" Width="700"
+        KeyDown="Window_KeyDown">
+
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Save Deck to Database" Click="SaveDeckToDatabaseCommand" />
+                <MenuItem Header="Load Deck from Database" Click="LoadDeckFromDatabase" />
+                <Separator />
+                <MenuItem Header="Exit" Click="ExitButtonClick" />
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="AboutCommand" />
+                <MenuItem Header="Usage Instructions" Click="HelpCommand" />
+            </MenuItem>
+        </Menu>
+
+
+        <!-- Main Content -->
+        <Grid Margin="10">
+            <!-- Card Section -->
+            <GroupBox Header="Card" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="150">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Suit" />
+                    <TextBox Name="SuitTextBox" Width="150" Height="25" ToolTip="Enter the card suit (e.g., Hearts, Spades, Joker)." />
+                    <TextBlock Text="Rank" />
+                    <TextBox Name="RankTextBox" Width="150" Height="25" ToolTip="Enter the card rank (e.g., Ace, King, Wild)." />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Add Custom Card Button -->
+            <Button Content="Add Custom" Name="AddCustomButton" Width="85" Height="30" 
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,30,0,0"
+                    Command="{Binding AddCustomCommand}" ToolTip="Add a custom card to the deck." Click="AddCustomButtonClick" />
+
+            <!-- Deck Section -->
+            <GroupBox Header="Deck" HorizontalAlignment="Left" VerticalAlignment="Top" Width="192" Height="300" Margin="320,16,0,0">
+                <ListView Name="DeckListView" Margin="2,0,-2,0" />
+            </GroupBox>
+
+            <!-- Control Buttons -->
+            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Width="150" Margin="0,10,10,0">
+                <Button Content="View Deck" Name="ViewDeckButton" Width="120" Height="30" Margin="0,10,0,0" Command="{Binding ViewDeckCommand}" ToolTip="View all cards in the deck." Click="ViewDeckButtonClick" />
+                <Button Content="Shuffle" Name="ShuffleButton" Width="120" Height="30" Margin="0,10,0,0" Command="{Binding ShuffleCommand}" ToolTip="Shuffle the deck." Click="ShuffleButtonClick" />
+                <Button Content="Reset" Name="ResetButton" Width="120" Height="30" Margin="0,10,0,0" Command="{Binding ResetCommand}" ToolTip="Reset the deck to its initial state." Click="ResetButtonClick" />
+                <Button Content="Exit" Name="ExitButton" Width="120" Height="30" Margin="0,10,0,0" Command="{Binding ExitCommand}" ToolTip="Exit the application." Click="ExitButtonClick" />
+            </StackPanel>
+
+            <!-- Draw Section -->
+            <TextBlock Text="Draw" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,170,0,0"/>
+            <TextBox Name="DrawTextBox" Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,170,0,0" ToolTip="Enter the number of cards to draw." />
+            <Button Content="Deal" Name="DealButton" Width="50" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,170,0,0" Command="{Binding DealCommand}" ToolTip="Deal the specified number of cards." Click="DealButtonClick" />
+
+            <!-- Cards Dealt Section -->
+            <TextBlock Text="Cards Dealt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,220,0,0"/>
+            <ListView Name="CardsDealtListView" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,240,0,0"/>
+        </Grid>
+    </DockPanel>
+</Window>
